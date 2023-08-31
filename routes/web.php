@@ -1,5 +1,6 @@
 <?php
 
+use Laragear\WebAuthn\WebAuthn;
 use App\Http\Controllers\CompanySettingController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
@@ -7,6 +8,8 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\PermissionController;
 use App\Models\CompanySetting;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +21,11 @@ use App\Models\CompanySetting;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+// Route::view('welcome');
+
+// WebAuthn Routes
+WebAuthn::routes();
 
 Route::get('/', function () {
     return view('login');
