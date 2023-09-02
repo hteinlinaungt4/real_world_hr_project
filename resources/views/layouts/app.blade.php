@@ -101,9 +101,9 @@
     </div>
     <section>
         <div class="container-fluid">
-            <div class="row justify-content-center shadow">
+            <div class="row justify-content-center shadow align-content-center">
                 <div class="col-md-10">
-                    <ul class="d-flex justify-content-between py-3 list-unstyled">
+                    <ul class="d-flex justify-content-between  list-unstyled">
                         {{-- @if( Request::url() == "http://127.0.0.1:8000/dashboard" || Request::url() == "http://127.0.0.1:8000/employee" || Request::url() == "http://127.0.0.1:8000/role" || Request::url() == "http://127.0.0.1:8000/permission" || Request::url() == "http://127.0.0.1:8000/department") --}}
                         <li class="fs-3"><i class="fa-solid fa-bars" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop"></i></li>
                         {{-- @else --}}

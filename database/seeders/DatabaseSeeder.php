@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             'email'=>'admin@gmail.com',
             'gender'=>'male',
             'employee_id'=>'Admin-001',
+            'birthday'=>'2001-5-19',
             'Address'=>'Aungban',
             'department_id' => '1',
             'phone'=>'09448977540',

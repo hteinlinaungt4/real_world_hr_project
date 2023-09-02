@@ -16,23 +16,24 @@
                         <div class="text-center">
                             <img src="https://www.svgrepo.com/show/368289/ninja.svg"  alt="" width="100px" height="100px">
                         </div>
-                        <form action="{{ route('login')}}" method="post">
+                        <form action="{{ route('optionlogin')}}" method="get">
                             @csrf
                             <div class="form-group mb-2">
                                 <label for="">Email</label>
                                 <input type="email" name="email" class="form-control" placeholder="Enter Email ....">
                             </div>
-                            <div class="form-group mb-2">
-                                <label for="">Password</label>
-                                <input type="password" name="password" class="form-control" placeholder="Enter Password ....">
-                            </div>
-                            <button class="btn btn-primary">Login</button>
+                            <button class="btn btn-primary w-100">Continue</button>
                         </form>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+  <!-- Tabs navs -->
+
+
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>

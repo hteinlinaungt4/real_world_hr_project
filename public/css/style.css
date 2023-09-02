@@ -1,0 +1,13 @@
+.fa-fingerprint{
+    font-size: 50px;
+}
+.fa-circle-plus{
+    position: absolute;
+    bottom: 5px;
+    right: 2px;
+}
+#fig{
+    position: relative;
+    width: 70px;
+    height: 70px;
+}

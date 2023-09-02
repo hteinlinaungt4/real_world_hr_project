@@ -1,13 +1,14 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
+use App\Models\CompanySetting;
 use Laragear\WebAuthn\WebAuthn;
-use App\Http\Controllers\CompanySettingController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\PermissionController;
-use App\Models\CompanySetting;
+use App\Http\Controllers\CompanySettingController;
 
 
 
@@ -27,9 +28,8 @@ use App\Models\CompanySetting;
 // WebAuthn Routes
 WebAuthn::routes();
 
-Route::get('/', function () {
-    return view('login');
-})->name('loginpage');
+Route::get('/',[ProfileController::class,'loginpage'])->name('loginpage');
+Route::get('/logincomponent',[ProfileController::class,'optionlogin'])->name('optionlogin');
 
 Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])->group(function () {
     Route::get('/dashboard', function () {
@@ -47,8 +47,9 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
     // permission
     Route::resource('permission',PermissionController::class);
     Route::get('ssd/permission',[PermissionController::class,'ssd'])->name('permission.ssd');
-
-     // department
-     Route::resource('company_setting',CompanySettingController::class)->only(['edit','update','show']);
+    // profile
+    Route::get('profile',[ProfileController::class,'profile']);
+    // department
+    Route::resource('company_setting',CompanySettingController::class)->only(['edit','update','show']);
 
 });
