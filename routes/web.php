@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\ProfileController;
 use App\Models\CompanySetting;
 use Laragear\WebAuthn\WebAuthn;
@@ -30,6 +31,7 @@ WebAuthn::routes();
 
 Route::get('/',[ProfileController::class,'loginpage'])->name('loginpage');
 Route::get('/logincomponent',[ProfileController::class,'optionlogin'])->name('optionlogin');
+Route::get('attendance',[AttendanceController::class,'index']);
 
 Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])->group(function () {
     Route::get('/dashboard', function () {
