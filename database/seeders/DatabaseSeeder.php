@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             'Address'=>'Aungban',
             'department_id' => '1',
             'phone'=>'09448977540',
+            'pin_code'=>'000000',
             'password'=> Hash::make('12345678'),
         ]);
         Department::create([

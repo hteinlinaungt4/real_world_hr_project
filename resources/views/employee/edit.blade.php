@@ -85,6 +85,10 @@
                                 </select>
                             </div>
                             <div class="form-group mb-2">
+                                <label for="" class="mb-2">Pin Code</label>
+                                <input  type="number" value="{{ $employee->pin_code }}" name="pin_code" class="form-control"  placeholder="Enter Pin Code ...">
+                            </div>
+                            <div class="form-group mb-2">
                                 <label for="" class="mb-2">Role</label>
                                 <select name="roles[]" id="" class="form-control select_hr" multiple>
                                     @foreach ($roles as $role)

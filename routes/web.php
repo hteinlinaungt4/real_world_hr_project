@@ -1,15 +1,19 @@
 <?php
 
-use App\Http\Controllers\AttendanceController;
-use App\Http\Controllers\ProfileController;
 use App\Models\CompanySetting;
+use App\Models\CheckinCheckout;
 use Laragear\WebAuthn\WebAuthn;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\MyAttendanceController;
+use App\Http\Controllers\AttendanceScanController;
 use App\Http\Controllers\CompanySettingController;
+use App\Http\Controllers\CheckinCheckoutController;
 
 
 
@@ -28,10 +32,10 @@ use App\Http\Controllers\CompanySettingController;
 
 // WebAuthn Routes
 WebAuthn::routes();
-
 Route::get('/',[ProfileController::class,'loginpage'])->name('loginpage');
 Route::get('/logincomponent',[ProfileController::class,'optionlogin'])->name('optionlogin');
-Route::get('attendance',[AttendanceController::class,'index']);
+Route::get('checkin-checkout',[CheckinCheckoutController::class,'index']);
+Route::get('pincode',[CheckinCheckoutController::class,'pincode']);
 
 Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])->group(function () {
     Route::get('/dashboard', function () {
@@ -53,5 +57,23 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
     Route::get('profile',[ProfileController::class,'profile']);
     // department
     Route::resource('company_setting',CompanySettingController::class)->only(['edit','update','show']);
+
+    // attendance
+    Route::resource('attendance',AttendanceController::class);
+    Route::get('ssd/attendance',[AttendanceController::class,'ssd']);
+    Route::get('attendance_overview',[AttendanceController::class,'overview'])->name('attendance_overview');
+    Route::get('attendance_overview_table',[AttendanceController::class,'overview_table'])->name('attendance_overview_table');
+
+    //myattendance
+    Route::get('ssd/myattendance',[MyAttendanceController::class,'ssd']);
+    Route::get('myattendance_overview_table',[MyAttendanceController::class,'overview_table'])->name('myattendance_overview');
+
+
+
+
+
+    // scan
+    Route::get('/attendance-scan',[AttendanceScanController::class,'scan'])->name('attendance_scan');
+    Route::post('store/attendance-scan',[AttendanceScanController::class,'store'])->name('qrscan');
 
 });

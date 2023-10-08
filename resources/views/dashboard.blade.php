@@ -17,6 +17,7 @@
             </div>
         </div>
     </div>
+
 @endsection
 @section('script')
       <!-- Registering authenticator -->

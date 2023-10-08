@@ -90,6 +90,7 @@ class EmployeeController extends Controller
         $employee=new User();
         $employee->employee_id = $request->employee_id;
         $employee->name =$request->name;
+        $employee->pin_code =$request->pin_code;
         $employee->phone = $request->phone;
         $employee->email = $request->email;
         $employee->nrc_number = $request->nrc_number;
@@ -108,9 +109,9 @@ class EmployeeController extends Controller
     }
     // edit
     function edit($id){
-        if(!auth()->user()->can('employee_edit')){
-            abort(403,'Unauthorized Action');
-        }
+        // if(!auth()->user()->can('employee_edit')){
+        //     abort(403,'Unauthorized Action');
+        // }
         $roles=Role::all();
         $employee=User::findorfail($id);
         $oldrole=$employee->roles->pluck('id')->toArray();
@@ -132,6 +133,7 @@ class EmployeeController extends Controller
         }
         $employee->employee_id = $request->employee_id;
         $employee->name = $request->name;
+        $employee->pin_code = $request->pin_code;
         $employee->phone = $request->phone;
         $employee->email = $request->email;
         $employee->nrc_number = $request->nrc_number;
