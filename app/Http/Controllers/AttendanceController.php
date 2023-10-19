@@ -117,6 +117,9 @@ class AttendanceController extends Controller
         if(!auth()->user()->can('attendance_create')){
             abort(403,'Unauthorized Action');
         }
+        if(now()->format('D') == "Sat" || now()->format('D') == "Sun"){
+            return back()->withErrors(['fails' => 'Today is Off Day!'])->withInput();
+        }
         if(CheckinCheckout::where('user_id',$request->user)->where('date',$request->date)->exists()){
             return back()->withErrors(['fails' => 'Already Defined Date!'])->withInput();
         }

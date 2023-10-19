@@ -19,14 +19,18 @@ class CheckinCheckOutSeeder extends Seeder
         //
         $users=User::all();
         foreach ($users as $user) {
-            $periods = CarbonPeriod::create('2020-01-01', '2020-12-31');
+
+            $periods = CarbonPeriod::create('2023-01-01', '2023-12-31');
             foreach ($periods as $period) {
-                $checkincheckout=new CheckinCheckout();
-                $checkincheckout->user_id = $user->id;
-                $checkincheckout->checkin_time=Carbon::parse( $period->format('Y-m-d').' '.'09:00:00')->subMinutes(rand(1,55));
-                $checkincheckout->checkout_time=Carbon::parse($period->format('Y-m-d').' '.'18:00:00')->subMinutes(rand(1,55));
-                $checkincheckout->date=$period;
-                $checkincheckout->save();
+                if($period->format('D') != "Sat" && $period->format('D') != "Sun"){
+                    $checkincheckout=new CheckinCheckout();
+                    $checkincheckout->user_id = $user->id;
+                    $checkincheckout->checkin_time=Carbon::parse( $period->format('Y-m-d').' '.'09:00:00')->subMinutes(rand(1,55));
+                    $checkincheckout->checkout_time=Carbon::parse($period->format('Y-m-d').' '.'18:00:00')->subMinutes(rand(1,55));
+                    $checkincheckout->date=$period;
+                    $checkincheckout->save();
+                }
+
             }
 
         }

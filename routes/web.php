@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\MyProjectController;
+use App\Http\Controllers\PayrollController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\SalaryController;
+use App\Http\Controllers\TaskController;
 use App\Models\CompanySetting;
 use App\Models\CheckinCheckout;
 use Laragear\WebAuthn\WebAuthn;
@@ -54,8 +59,8 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
     Route::resource('permission',PermissionController::class);
     Route::get('ssd/permission',[PermissionController::class,'ssd'])->name('permission.ssd');
     // profile
-    Route::get('profile',[ProfileController::class,'profile']);
-    // department
+    Route::get('profile',[ProfileController::class,'profile'])->name('profile');
+    // company
     Route::resource('company_setting',CompanySettingController::class)->only(['edit','update','show']);
 
     // attendance
@@ -67,7 +72,32 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
     //myattendance
     Route::get('ssd/myattendance',[MyAttendanceController::class,'ssd']);
     Route::get('myattendance_overview_table',[MyAttendanceController::class,'overview_table'])->name('myattendance_overview');
+    Route::get('mypayroll_table',[MyAttendanceController::class,'payroll_table'])->name('payroll_table');
 
+
+
+    // Salary
+    Route::resource('salary',SalaryController::class);
+    Route::get('ssd/salary',[SalaryController::class,'ssd'])->name('salary.ssd');
+
+    // Payroll
+    Route::get('payroll',[PayrollController::class,'index'])->name('payroll');
+    Route::get('payroll_table',[PayrollController::class,'overview_table'])->name('payroll_overview');
+
+
+
+
+    // project
+    Route::resource('project',ProjectController::class);
+    Route::get('ssd/project',[ProjectController::class,'ssd']);
+    // my project
+    Route::resource('myproject',MyProjectController::class)->only(['index','show']);
+    Route::get('ssd/myproject',[MyProjectController::class,'ssd']);
+
+    // Task
+    Route::resource('task',TaskController::class);
+    Route::get('task_table',[TaskController::class,'task_table']);
+    Route::get('task_sort',[TaskController::class,'task_sort']);
 
 
 

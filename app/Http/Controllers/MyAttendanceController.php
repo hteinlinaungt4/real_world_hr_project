@@ -15,7 +15,6 @@ class MyAttendanceController extends Controller
 {
     //
     function ssd(Request $request){
-        logger($request->months);
         $attendance=CheckinCheckout::with('employee')->where('user_id',Auth::user()->id);
         if($request->months){
             $attendance=$attendance->whereMonth('date',$request->months);
@@ -39,6 +38,29 @@ class MyAttendanceController extends Controller
             return $each->employee ? $each->employee->name : '_';
         })
         ->make(true);
+    }
+    function payroll_table(Request $request){
+        $month=$request->months;
+        $year=$request->years;
+        $startOfMonth=$year.'-'.$month.'-01'; //2023-02-01
+        $endOfMonth=Carbon::parse($startOfMonth)->endOfMonth()->format('Y-m-d');
+        // use day of Month
+        $dayofMonth=Carbon::parse($startOfMonth)->daysInMonth;
+
+        // use working day
+        $workingdays= Carbon::parse($startOfMonth)->diffInDaysFiltered(function (Carbon $date) {
+            return $date->isWeekday();
+        }, Carbon::parse($endOfMonth)->addDays(1));
+        // offday
+        $offdays=$dayofMonth-$workingdays;
+        // leave
+
+        $companysettings=CompanySetting::find('1')->first();
+        $periods = CarbonPeriod::create($startOfMonth,$endOfMonth);
+        $employees=User::orderBy('employee_id')->where('name','like','%'.$request->employee.'%')->where('name',Auth::user()->name)->get();
+        $attendances=CheckinCheckout::whereMonth('date',$month)->whereYear('date',$year)->get();
+        return view('components.payroll_table',compact('periods','employees','attendances','companysettings','dayofMonth','workingdays','offdays','month','year'))->render();
+
     }
 
 

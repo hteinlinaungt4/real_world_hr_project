@@ -109,9 +109,9 @@ class EmployeeController extends Controller
     }
     // edit
     function edit($id){
-        // if(!auth()->user()->can('employee_edit')){
-        //     abort(403,'Unauthorized Action');
-        // }
+        if(!auth()->user()->can('employee_edit')){
+            abort(403,'Unauthorized Action');
+        }
         $roles=Role::all();
         $employee=User::findorfail($id);
         $oldrole=$employee->roles->pluck('id')->toArray();

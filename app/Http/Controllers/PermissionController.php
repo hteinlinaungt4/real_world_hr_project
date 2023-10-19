@@ -10,7 +10,7 @@ use App\Http\Requests\StorePermission;
 use App\Http\Requests\UpdateDepartment;
 use App\Http\Requests\UpdatePermission;
 use Spatie\Permission\Models\Permission;
-use App\Http\Controllers\PermissionController;
+
 
 class PermissionController extends Controller
 {

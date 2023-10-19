@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title','Profile')
 @section('content')
-    <div class="container-fluid">
+    <div class="container-fluid vh-100">
         <div class="row d-flex justify-content-center mt-5">
             <div class="col-md-8">
                 <div class="card p-5 border-0 shadow">
@@ -17,7 +17,7 @@
                                 @endif
                                 <h3 class="my-3">{{ Auth::user()->name}}</h3>
                                 <p>{{Auth::user()->employee_id}} | <span class="text-success fw-bold">{{Auth::user()->phone}}</span></p>
-                                <p class="">{{Auth::user()->permissions}}</p>
+                                <p class="">{{Auth::user()->department->title ? Auth::user()->department->title : 'No_Department'  }}</p>
                             </div>
                         </div>
                         <div class="col-6 px-3" style="border-left:3px dotted black;">

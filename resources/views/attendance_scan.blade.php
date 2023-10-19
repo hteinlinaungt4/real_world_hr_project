@@ -53,9 +53,13 @@
                        </div>
                     </div>
                     <div class="card-body">
+                        <h5>Payroll</h5>
+                        <div class="payroll_table"></div>
+                        <h5>Attendance Overview</h5>
                         <div class="over_view_table"></div>
                     </div>
                 </div>
+                <h5>Attendance Record</h5>
                 <table class="table table-bordered text-center w-100 display nowrap" id="usertable">
                     <thead>
                         <th>Employee_Name</th>
@@ -150,9 +154,22 @@
                 })
                 table.ajax.url(`ssd/myattendance?months=${months}&years=${years}`).load();
             }
+         payrolloverviewtable();
+            function payrolloverviewtable(){
+                var months=$('.month').val();
+                var years=$('.year').val();
+                $.ajax({
+                    url:`/mypayroll_table?months=${months}&years=${years}`,
+                    type:'get',
+                    success:function(res){
+                        $('.payroll_table').html(res)
+                    }
+                })
+            }
            $('#select').on("click",function(event){
                 event.preventDefault();
                 attendanceoverviewtable();
+                payrolloverviewtable();
            })
 
 

@@ -17,6 +17,13 @@ class CheckinCheckoutController extends Controller
         return view('checkin_checkout',compact('hash_value'));
     }
     public function pincode(Request $request){
+        if(now()->format('D') == "Sat" || now()->format('D') == "Sun"){
+            $data =[
+                'status' => 'fail',
+                'message' => "Today is Off Day",
+            ];
+             return response()->json($data, 200);
+        }
         $pincode=$request->value;
         $message="";
         $pincode=User::where('pin_code',$pincode)->first();

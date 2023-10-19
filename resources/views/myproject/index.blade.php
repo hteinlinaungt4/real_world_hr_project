@@ -1,23 +1,27 @@
 @extends('layouts.app')
-@section('title', 'Attendance')
+@section('title', 'My Project')
 @section('content')
     <div class="container-fluid">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-10">
                 <div class="card mt-5 p-3 border-0">
                     <div class="card-header">
-                        @can('department_create')
-                        <a href="{{ route('attendance.create') }}" class=" text-decoration-none btn btn-sm btn-primary">
-                            <i class="fa-solid fa-circle-plus"></i> Add New</a>
+                        @can('project_create')
+                        <a href="{{ route('project.create') }}" class=" text-decoration-none btn btn-sm btn-primary"><i
+                            class="fa-solid fa-circle-plus"></i> Add New</a>
                         @endcan
                     </div>
                     <div class="card-body">
-                        <table class="table table-bordered text-center w-100 display nowrap" id="usertable">
-                            <thead>
-                                <th>Employee_Name</th>
-                                <th>Date</th>
-                                <th>Checkin_time</th>
-                                <th>Checkout_time</th>
+                        <table class="table table-bordered  w-100 display " id="usertable">
+                            <thead class="text-center">
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Leaders</th>
+                                <th>Members</th>
+                                <th>Start Date</th>
+                                <th>Deadline</th>
+                                <th>Priority</th>
+                                <th>Status</th>
                                 <th class="nosort">Actions</th>
                             </thead>
                         </table>
@@ -31,33 +35,44 @@
     <script>
         $(document).ready(function() {
             var table=$('#usertable').DataTable({
-                dom: 'Bfrtip',
-                buttons: [
-                    'copy', 'csv', 'excel', 'pdf', 'print'
-                ],
                 mark:true,
                 responsive: true,
                 processing: true,
                 serverSide: true,
-                ajax: 'ssd/attendance',
+                ajax: 'ssd/myproject',
                 columns: [
                     {
-                        data: 'employee_name',
-                        name: 'employee_name'
+                        data: 'title',
+                        name: 'title'
                     },
                     {
-                        data: 'date',
-                        name: 'date'
+                        data: 'description',
+                        name: 'description',
                     },
                     {
-                        data: 'checkin_time',
-                        name: 'checkin_time'
+                        data: 'leader',
+                        name: 'leader',
                     },
                     {
-                        data: 'checkout_time',
-                        name: 'checkout_time'
+                        data: 'member',
+                        name: 'member',
                     },
-
+                    {
+                        data: 'start_date',
+                        name: 'start_date',
+                    },
+                    {
+                        data: 'deadline',
+                        name: 'deadline',
+                    },
+                    {
+                        data: 'priority',
+                        name: 'priority',
+                    },
+                    {
+                        data: 'status',
+                        name: 'status',
+                    },
                     {
                         data: 'actions',
                         name: 'actions',
@@ -91,7 +106,7 @@
                     if (result.isConfirmed) {
                         $.ajax({
                         method: "Delete",
-                        url: `attendance/${id}`,
+                        url: `project/${id}`,
                         })
                         .done(function( msg ) {
                             table.ajax.reload();

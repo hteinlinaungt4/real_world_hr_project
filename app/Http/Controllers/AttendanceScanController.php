@@ -15,6 +15,13 @@ class AttendanceScanController extends Controller
         return view('attendance_scan');
     }
     public function store(Request $request){
+        if(now()->format('D') == "Sat" || now()->format('D') == "Sun"){
+            $data =[
+                'status' => 'fail',
+                'message' => "Today is Off Day",
+            ];
+             return response()->json($data, 200);
+        }
         $hash_value=$request->value;
         $user=Auth::user();
         $message="";

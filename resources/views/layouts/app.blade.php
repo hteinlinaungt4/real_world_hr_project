@@ -7,12 +7,10 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
     {{-- figureprint  --}}
-    {{-- ... --}}
-
-    <script src="{{ Vite::asset('resources/js/vendor/webauthn/webauthn.js') }}"></script>
-
     {{-- @vite(['resources/js/app.js']) --}}
-    {{-- fontawesome --}}
+    <script src="{{ Vite::asset('resources/js/vendor/webauthn/webauthn.js') }}"></script>
+    {{-- viewrjs --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.min.css" integrity="sha512-za6IYQz7tR0pzniM/EAkgjV1gf1kWMlVJHBHavKIvsNoUMKWU99ZHzvL6lIobjiE2yKDAKMDSSmcMAxoiWgoWA==" crossorigin="anonymous" referrerpolicy="no-referrer" />    {{-- fontawesome --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     {{-- bootstrap --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
@@ -20,6 +18,8 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
+
     {{-- mark --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/datatables.mark.js/2.0.0/datatables.mark.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/plug-ins/1.10.13/features/mark.js/datatables.mark.min.css">
@@ -36,6 +36,9 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
 <!-- Or for RTL support -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css" />
+{{-- extra css  --}}
+@yield('extracss')
+
 </head>
 <body>
     <div class="offcanvas offcanvas-start" data-bs-backdrop="static" tabindex="-1" id="staticBackdrop" aria-labelledby="staticBackdropLabel">
@@ -81,6 +84,22 @@
                     <hr>
                 </li>
                 @endcan
+                @can('salary_view')
+                <li class="fs-3">
+                    <a href="{{ route('salary.index') }}" class="text-decoration-none text-black">
+                        <i class="fa-solid fa-hand-holding-dollar mx-2"></i>  | Salary
+                    </a>
+                    <hr>
+                </li>
+                @endcan
+                @can('payroll_view')
+                <li class="fs-3">
+                    <a href="{{ route('payroll') }}" class="text-decoration-none text-black">
+                        <i class="fa-solid fa-money-check-dollar mx-2"></i>  | Payroll
+                    </a>
+                    <hr>
+                </li>
+                @endcan
                 @can('department_view')
                 <li class="fs-3">
                     <a href="{{ route('department.index')}}" class="text-decoration-none text-black">
@@ -102,6 +121,15 @@
                     <a href="{{ route('role.index')}}" class="text-decoration-none text-black">
                         <i class="fa-solid fa-user-graduate mx-2"></i>  | Role
                     </a>
+                    <hr>
+                </li>
+                @endcan
+                @can('project_view')
+                <li class="fs-3">
+                    <a href="{{ route('project.index')}}" class="text-decoration-none text-black">
+                        <i class="fa-solid fa-toolbox mx-2"></i>  | Project
+                    </a>
+
                     <hr>
                 </li>
                 @endcan
@@ -143,9 +171,11 @@
         @yield('content')
     </section>
     <section>
-        <nav class="d-flex justify-content-between  w-100 p-3 shadow-lg" style="position:absolute;bottom: 0;width: 100%">
-            <a href="">Profile</a>
-            <a href="{{route('attendance_scan')}}">Attendance</a>
+        <nav class="d-flex justify-content-between bg-light w-100 px-2 py-1 shadow-lg" style="position:absolute;bottom: 0;width: 100%">
+            <a href="{{route('dashboard')}}" class="text-center text-decoration-none fs-5 text-black"> <i class="fa-solid fa-home fs-5 mx-2 text-black "></i><div>Home</div></a>
+            <a href="{{route('profile')}}" class="text-center text-decoration-none fs-5 text-black"> <i class="fa-solid fa-user fs-5 mx-2 text-black "></i><div>Profile</div></a>
+            <a href="{{route('myproject.index')}}" class="text-center text-decoration-none fs-5 text-black"> <i class="fa-solid fa-toolbox fs-5 mx-2 text-black "></i><div>My Project</div></a>
+            <a href="{{route('attendance_scan')}}" class="text-center text-decoration-none fs-5 text-black"> <i class="fa-solid fa-calendar-week fs-5 mx-2 text-black "></i><div>Attendance</div></a>
         </nav>
     </section>
 
@@ -156,6 +186,11 @@
 {{-- datatable --}}
 {{-- <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script> --}}
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
 {{-- mark  --}}
 <script src="https://cdn.jsdelivr.net/g/mark.js(jquery.mark.min.js),datatables.mark.js"></script>
 <script src="https://cdn.jsdelivr.net/g/mark.js(jquery.mark.min.js)"></script>
@@ -170,9 +205,11 @@
 {{-- daterangepicker --}}
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+{{-- sortable  --}}
+<!-- jsDelivr :: Sortable :: Latest (https://www.jsdelivr.com/package/npm/sortablejs) -->
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
 {{-- select2 --}}
-
-<!-- Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.min.js" integrity="sha512-EC3CQ+2OkM+ZKsM1dbFAB6OGEPKRxi6EDRnZW9ys8LghQRAq6cXPUgXCCujmDrXdodGXX9bqaaCRtwj4h4wgSQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 @yield('script')
 <script>
@@ -184,7 +221,7 @@
 
         })
         $('.select_hr').select2( {
-            theme: 'bootstrap-5'
+            theme: 'bootstrap-5',
         } );
         $.ajaxSetup({
             headers: {
