@@ -27,7 +27,7 @@
                         $break_end_time= $period->format('Y-m-d').' '.$companysettings->break_end_time;
                         $attendance =collect($attendances)->where('user_id',$employee->id)->where('date',$period->format('Y-m-d'))->first();
                         if ($attendance) {
-                            if(!null($attendance->checkin_time)){
+                            if(!is_null($attendance->checkin_time)){
                                 if ($attendance->checkin_time < $office_start_time) {
                                 $attendanceDay +=0.5;
                                 }else if($attendance->checkin_time > $office_start_time && $attendance->checkin_time < $break_start_time){
@@ -39,7 +39,7 @@
                                 $attendanceDay +=0;
                             }
 
-                            if(!null($attendance->checkout_time )){
+                            if(!is_null($attendance->checkout_time )){
                                 if ($attendance->checkout_time < $break_end_time) {
                                 $attendanceDay +=0;
                                 }else if($attendance->checkout_time > $break_end_time && $attendance->checkout_time < $office_end_time){

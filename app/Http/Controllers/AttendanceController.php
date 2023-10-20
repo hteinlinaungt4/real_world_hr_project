@@ -14,6 +14,8 @@ use App\Http\Requests\StoreAttendance;
 use App\Http\Requests\StoreDepartment;
 use App\Http\Requests\UpdateAttendance;
 use App\Http\Requests\UpdateDepartment;
+use PDF;
+
 
 class AttendanceController extends Controller
 {
@@ -131,6 +133,13 @@ class AttendanceController extends Controller
         ];
         CheckinCheckout::create($data);
         return redirect()->route('attendance.index')->with(['successmsg' => 'You are created Successfully!']);
+    }
+
+    // pdf
+    public function pdf(){
+        $records=CheckinCheckout::with('employee')->get();
+        $pdf = PDF::loadView('pdf.attendance',compact('records'));
+        return $pdf->download('attendance.pdf');
     }
 
 

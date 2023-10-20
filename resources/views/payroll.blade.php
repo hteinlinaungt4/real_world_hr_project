@@ -80,7 +80,6 @@
                 event.preventDefault();
                 payrolloverviewtable();
            })
-
         })
 
 

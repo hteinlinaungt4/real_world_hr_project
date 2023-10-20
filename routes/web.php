@@ -68,11 +68,14 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
     Route::get('ssd/attendance',[AttendanceController::class,'ssd']);
     Route::get('attendance_overview',[AttendanceController::class,'overview'])->name('attendance_overview');
     Route::get('attendance_overview_table',[AttendanceController::class,'overview_table'])->name('attendance_overview_table');
+    Route::get('pdf',[AttendanceController::class,'pdf'])->name('pdf');
+
 
     //myattendance
     Route::get('ssd/myattendance',[MyAttendanceController::class,'ssd']);
     Route::get('myattendance_overview_table',[MyAttendanceController::class,'overview_table'])->name('myattendance_overview');
     Route::get('mypayroll_table',[MyAttendanceController::class,'payroll_table'])->name('payroll_table');
+
 
 
 
@@ -83,6 +86,7 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
     // Payroll
     Route::get('payroll',[PayrollController::class,'index'])->name('payroll');
     Route::get('payroll_table',[PayrollController::class,'overview_table'])->name('payroll_overview');
+
 
 
 

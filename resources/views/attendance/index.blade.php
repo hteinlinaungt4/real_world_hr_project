@@ -6,10 +6,11 @@
             <div class="col-md-8">
                 <div class="card mt-5 p-3 border-0">
                     <div class="card-header">
-                        @can('department_create')
+                        @can('attendance_create')
                         <a href="{{ route('attendance.create') }}" class=" text-decoration-none btn btn-sm btn-primary">
                             <i class="fa-solid fa-circle-plus"></i> Add New</a>
                         @endcan
+                        <a href="{{ route('pdf')}}" target="_blank" class=" text-decoration-none text-white btn btn-sm btn-dark"><i class="fa-solid fa-file-pdf"></i> Download</a>
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered text-center w-100 display nowrap" id="usertable">
@@ -31,10 +32,6 @@
     <script>
         $(document).ready(function() {
             var table=$('#usertable').DataTable({
-                dom: 'Bfrtip',
-                buttons: [
-                    'copy', 'csv', 'excel', 'pdf', 'print'
-                ],
                 mark:true,
                 responsive: true,
                 processing: true,

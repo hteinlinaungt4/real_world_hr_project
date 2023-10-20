@@ -40,4 +40,5 @@ class PayrollController extends Controller
         $attendances=CheckinCheckout::whereMonth('date',$month)->whereYear('date',$year)->get();
         return view('components.payroll_table',compact('periods','employees','attendances','companysettings','dayofMonth','workingdays','offdays','month','year'))->render();
     }
+
 }
