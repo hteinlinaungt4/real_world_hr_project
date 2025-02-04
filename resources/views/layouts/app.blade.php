@@ -61,7 +61,7 @@
           <div class="mt-2">
             <ul class="list-unstyled">
                 @can('employee_view')
-                <li class="fs-3">
+                <li class="fs-5">
                     <a href="{{ route('employee.index')}}" class="text-decoration-none text-black">
                         <i class="fa-solid fa-users mx-2"></i>| Employee
                     </a>
@@ -69,7 +69,7 @@
                 </li>
                 @endcan
                 @can('attendance_view')
-                <li class="fs-3">
+                <li class="fs-5">
                     <a href="{{ route('attendance.index')}}" class="text-decoration-none text-black">
                         <i class="fa-solid fa-calendar-week mx-2"></i>  | Attendance
                     </a>
@@ -77,7 +77,7 @@
                 </li>
                 @endcan
                 @can('attendance_overview')
-                <li class="fs-3">
+                <li class="fs-5">
                     <a href="{{ route('attendance_overview') }}" class="text-decoration-none text-black">
                         <i class="fa-solid fa-calendar-week mx-2"></i>  | Attendance(Overview)
                     </a>
@@ -85,7 +85,7 @@
                 </li>
                 @endcan
                 @can('salary_view')
-                <li class="fs-3">
+                <li class="fs-5">
                     <a href="{{ route('salary.index') }}" class="text-decoration-none text-black">
                         <i class="fa-solid fa-hand-holding-dollar mx-2"></i>  | Salary
                     </a>
@@ -93,7 +93,7 @@
                 </li>
                 @endcan
                 @can('payroll_view')
-                <li class="fs-3">
+                <li class="fs-5">
                     <a href="{{ route('payroll') }}" class="text-decoration-none text-black">
                         <i class="fa-solid fa-money-check-dollar mx-2"></i>  | Payroll
                     </a>
@@ -101,7 +101,7 @@
                 </li>
                 @endcan
                 @can('department_view')
-                <li class="fs-3">
+                <li class="fs-5">
                     <a href="{{ route('department.index')}}" class="text-decoration-none text-black">
                         <i class="fa-solid fa-briefcase mx-2"></i> | Department
                     </a>
@@ -109,7 +109,7 @@
                 </li>
                 @endcan
                 @can('permission_view')
-                <li class="fs-3">
+                <li class="fs-5">
                     <a href="{{ route('permission.index')}}" class="text-decoration-none text-black">
                         <i class="fa-solid fa-shield-halved mx-2"></i> | Permission
                     </a>
@@ -117,7 +117,7 @@
                 </li>
                 @endcan
                 @can('role_view')
-                <li class="fs-3">
+                <li class="fs-5">
                     <a href="{{ route('role.index')}}" class="text-decoration-none text-black">
                         <i class="fa-solid fa-user-graduate mx-2"></i>  | Role
                     </a>
@@ -125,7 +125,7 @@
                 </li>
                 @endcan
                 @can('project_view')
-                <li class="fs-3">
+                <li class="fs-5">
                     <a href="{{ route('project.index')}}" class="text-decoration-none text-black">
                         <i class="fa-solid fa-toolbox mx-2"></i>  | Project
                     </a>
@@ -133,7 +133,7 @@
                     <hr>
                 </li>
                 @endcan
-                <li class="fs-3">
+                <li class="fs-5">
                     <a href="{{ route('company_setting.show',1)}}" class="text-decoration-none text-black">
                         <i class="fa-solid fa-gear mx-2"></i> | Company Settings
                     </a>

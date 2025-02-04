@@ -48,7 +48,7 @@
                                     $attendanceDay +=0.5;
                                 }
                             }else{
-                                $attendanceDay +=0.5;
+                                $attendanceDay +=0;
                             }
 
                         }
